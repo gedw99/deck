@@ -2,6 +2,8 @@
 
 #TODO: add versioning, so that users can easily upgrade.
 
+all: build
+
 GO_BIN=go
 GO_MOD_UPGRADE_BIN=go-mod-upgrade
 print:
@@ -16,8 +18,9 @@ dep-os:
 	#  $(GO_MOD_UPGRADE_BIN)
 	go install github.com/oligot/go-mod-upgrade@latest
 
-## MODS
 
+
+## MODULES
 
 ## Reconciles golang packages
 mod-tidy:
@@ -27,21 +30,25 @@ mod-tidy:
 	
 ## Upgrades golang packages interactively
 mod-upgrade:
-	
 	@echo
 	@echo -- Visiting: $(PWD)
 	$(GO_MOD_UPGRADE_BIN)
 	$(GO_BIN) mod tidy
 	$(GO_BIN) mod verify
 
+
+
+### BUILD
+
 ## build
 build:
 	cd cmd/binaries && chmod +x ./bin-gen.sh && ./bin-gen.sh
 
-# build delete
+## delete the build
 build-delete:
 	cd cmd/binaries && chmod +x ./bin-delete.sh && ./bin-delete.sh
 
+## install
 install:
 	# TODO install from github releases.
 
